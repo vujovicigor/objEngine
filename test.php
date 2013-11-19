@@ -10,7 +10,7 @@
 
       <!--FETCH.Reklama -->
 <h2>$Reklama.naslov</h2> 
-<img src="/objengine/image.php?filename=$Reklama.slika&w=100">
+<img src="/objengine/image.php?filename=$Reklama.slika&amp;w=100">
 <h2>$Reklama.datum</h2> 
 
 
