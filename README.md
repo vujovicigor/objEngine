@@ -1,4 +1,4 @@
 objEngine
 =========
 
-Client part of objEngine framework (templating, JSON service)
+Client part of objEngine framework (templating, JSON service).
