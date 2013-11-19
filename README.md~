@@ -13,4 +13,3 @@ NOTES:
 - If you need picture resizer you must have PHP-GD library installed 
   (if not just do: "sudo apt-get install php5-gd"
   and then restart Apache with "/etc/init.d/apache2 restart" ). 
-
