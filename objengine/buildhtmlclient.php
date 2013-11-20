@@ -58,22 +58,28 @@ function getObjectFromDb($objectName, $objProperties){
   return $response;
 }
 
-function populateHtmlFromObject($src, $ObjData, $objName){
-  $res='';
-  //$dkeys = array_keys($ObjData[0]);
-  //echo "src=$rval ";
-  foreach ($ObjData as $objRow) {
-      $rval = $src;
-      foreach (array_keys($objRow) as $kName){
-      //echo ' key= '.$kName;
-      //echo ' nkey= '."$objName.$kName";
-      //echo ' $ObjData[0][$kName]= '.$ObjData[0][$kName];
-      $rval = str_ireplace("\$$objName.$kName", $objRow[$kName], $rval);
-    }
-    $res .= $rval."\n\r";
-  }
+function populateHtmlFromObject($src, $ObjData, $objName, $htmlspecialchars=true){
+	$res='';
+	//$dkeys = array_keys($ObjData[0]);
+	//echo "src=$rval ";
+	if ($htmlspecialchars)
+	  foreach ($ObjData as $objRow) {
+	      $rval = $src;
+	      foreach (array_keys($objRow) as $kName){
+	      $rval = str_ireplace("\$$objName.$kName", htmlspecialchars($objRow[$kName]), $rval);
+	    }
+	    $res .= $rval."\n\r";
+	  }
+	else
+	  foreach ($ObjData as $objRow) {
+	      $rval = $src;
+	      foreach (array_keys($objRow) as $kName){
+	      $rval = str_ireplace("\$$objName.$kName", $objRow[$kName], $rval);
+	    }
+	    $res .= $rval."\n\r";
+	  }
   
-  return $res;
+  	return $res;
 }
 
 function startParse($fHTML){
@@ -111,7 +117,8 @@ function parseEng($fHTML){
 
     $ObjDataArray = getObjectFromDb( $ObjName, $ObjProperties);
     //print_r($ObjDataArray);
-    $parsed = populateHtmlFromObject($innerHtml, $ObjDataArray, $ObjName);
+    $htmlspecialchars =(isset($objProperties['htmlspecialchars']) && (strtolower($objProperties['htmlspecialchars']))=='true');
+    $parsed = populateHtmlFromObject($innerHtml, $ObjDataArray, $ObjName, $htmlspecialchars);
     $outHTML = str_replace($matches[0][$ix][0], $parsed, $outHTML);
   }
   //echo "\n\r $outHTML";
