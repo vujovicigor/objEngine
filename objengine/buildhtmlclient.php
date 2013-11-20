@@ -4,11 +4,8 @@
   $serviceURL = 'http://ws.mobilearea.info/objengineservice.php';
   $licenceKey = 'demo';
  // getObjectFromDb($DBobject, 'onama', '') ;
- 
-function getObjectFromDb($objectName, $objPropertiesStr=''){
-  global $serviceURL;
-  global $licenceKey;
 
+function attributesToObject($objPropertiesStr=''){
   $objProperties=array();
   $pxml = simplexml_load_string("<f><objProp $objPropertiesStr /></f>");
   foreach($pxml->objProp[0]->attributes() as $pk => $pv)
@@ -16,6 +13,12 @@ function getObjectFromDb($objectName, $objPropertiesStr=''){
     $objProperties[(string)$pk]=(string)$pv;
     //echo (string)$pk.'='.(string)$pv."</br>";
   }
+  return $objProperties;
+}
+
+function getObjectFromDb($objectName, $objProperties){
+  global $serviceURL;
+  global $licenceKey;
 
   $isOK = false;
   $objectId = '';
@@ -98,12 +101,14 @@ function parseEng($fHTML){
 
   foreach ($matches[1] as $ix => $val) {
     $ObjName = $val[0];
-    $ObjProperties = $matches[2][$ix][0];
+    $ObjPropertiesStr = $matches[2][$ix][0];
     $innerHtml = $matches[3][$ix][0];
     //echo( ' Obj name: '.$ObjName."\n\r");
     //echo( ' ix: '.$ix."\n\r");
     //echo( ' innerHtml: '.$innerHtml."\n\r");
     //print_r($ObjProperties);
+    $objProperties = attributesToObject($ObjPropertiesStr);
+
     $ObjDataArray = getObjectFromDb( $ObjName, $ObjProperties);
     //print_r($ObjDataArray);
     $parsed = populateHtmlFromObject($innerHtml, $ObjDataArray, $ObjName);
