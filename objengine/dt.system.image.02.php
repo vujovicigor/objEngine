@@ -161,6 +161,7 @@ class cimage
         if (!is_null($fSaveAsFile )) imagepng($this->destImage, $fSaveAsFile); 
       break;
     case '.jpg':    
+    case 'jpeg':    
         header('Content-type: image/jpeg');   
         header('Content-Disposition: inline; filename="'.$AsFileName.'"');   
         header('Last-Modified: '.gmdate('D, d M Y H:i:s', $this->timeStamp).' GMT');        
@@ -169,7 +170,7 @@ class cimage
         imagejpeg($this->destImage, null, $this->destQuality); 
         if (!is_null($fSaveAsFile )) imagejpeg($this->destImage, $fSaveAsFile, $this->destQuality);    
       break;
-    case 'jpeg':    imagejpeg($this->destImage);    break;
+ /*   case 'jpeg':    imagejpeg($this->destImage);    break;
         header('Content-type: image/jpeg');   
         header('Content-Disposition: inline; filename="'.$AsFileName.'"');   
         header('Last-Modified: '.gmdate('D, d M Y H:i:s', $this->timeStamp).' GMT');        
@@ -178,7 +179,7 @@ class cimage
         imagejpeg($this->destImage, null, $this->destQuality); 
         if (!is_null($fSaveAsFile )) imagejpeg($this->destImage, $fSaveAsFile, $this->destQuality);    
       break;
-    default:
+*/    default:
         //ovde bismo mogli vratiti neku Not Available sliku
         return false;
       break;
