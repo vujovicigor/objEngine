@@ -115,7 +115,7 @@ function parseEng($fHTML){
     //print_r($ObjProperties);
     $objProperties = attributesToObject($ObjPropertiesStr);
 
-    $ObjDataArray = getObjectFromDb( $ObjName, $ObjProperties);
+    $ObjDataArray = getObjectFromDb( $ObjName, $objProperties);
     //print_r($ObjDataArray);
     $htmlspecialchars =(isset($objProperties['htmlspecialchars']) && (strtolower($objProperties['htmlspecialchars']))=='true');
     $parsed = populateHtmlFromObject($innerHtml, $ObjDataArray, $ObjName, $htmlspecialchars);
