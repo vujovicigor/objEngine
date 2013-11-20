@@ -66,7 +66,7 @@ function populateHtmlFromObject($src, $ObjData, $objName, $htmlspecialchars=true
 	  foreach ($ObjData as $objRow) {
 	      $rval = $src;
 	      foreach (array_keys($objRow) as $kName){
-	      $rval = str_ireplace("\$$objName.$kName", htmlspecialchars($objRow[$kName]), $rval);
+	      $rval = str_ireplace("\$$objName.$kName", htmlspecialchars($objRow[$kName], ENT_QUOTES), $rval);
 	    }
 	    $res .= $rval."\n\r";
 	  }
