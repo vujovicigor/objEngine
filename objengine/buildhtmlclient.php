@@ -74,6 +74,10 @@ function populateHtmlFromObject($src, $ObjData, $objName){
 }
 
 function startParse($fHTML){
+	return parseEng(parseEng($fHTML));
+}
+
+function parseEng($fHTML){
 
   preg_match_all('/<!-- *Fetch\.([\S]*)\s(.*)-->([\S\s]*?)<!-- *End *Fetch\.\1 *-->/i', $fHTML, $matches, PREG_OFFSET_CAPTURE );
 	
