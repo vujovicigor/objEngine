@@ -39,16 +39,16 @@ if(!function_exists('apache_request_headers'))
   include_once 'dt.system.image.02.php';
   include_once 'class.GetRemoteImage.php';
 
-  $imageBase='images/';
+  $imageBase='images/'; 
   $imageDir='';
   
 
-	$fx1=$_GET['x1'];
-	$fy1=$_GET['y1'];
-	$fx2=$_GET['x2'];
-	$fy2=$_GET['y2'];
-	$fwidth=$_GET['w'];
-	$fheight=$_GET['h'];
+	$fx1=(isset($_GET['x1'])?$_GET['x1']:null);
+	$fy1=(isset($_GET['y1'])?$_GET['y1']:null);
+	$fx2=(isset($_GET['x2'])?$_GET['x2']:null);
+	$fy2=(isset($_GET['y2'])?$_GET['y2']:null);
+	$fwidth=(isset($_GET['w'])?$_GET['w']:null);
+	$fheight=(isset($_GET['h'])?$_GET['h']:null);
 	if (isset($_GET['w']) || isset($_GET['h'])) $imageDir=$fwidth.'x'.$fheight.'/';
     
     
